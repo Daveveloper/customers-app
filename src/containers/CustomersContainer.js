@@ -39,20 +39,13 @@ CustomersContainer.propTypes = {
 };
 
 CustomersContainer.defaultProps = {
-    customers: [
-        {
-            "name":"Deivid Araya C.",
-            "dni":"114410391",
-            "age": 28
-        },
-        {
-            "name":"Manuel Medrano",
-            "dni":"514410391",
-            "age": 26
-        }
-    ]
+    customers: []
 };
 
 const initMapDispatchToProps = { fetchCustomers };
 
-export default withRouter(connect(null, initMapDispatchToProps)(CustomersContainer));
+const initMapStateToProps = state => ({
+    customers: state.customers
+});
+
+export default withRouter(connect(initMapStateToProps, initMapDispatchToProps)(CustomersContainer));
