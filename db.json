@@ -15,7 +15,7 @@
     {
       "id": 1,
       "title": "json-server",
-      "author": "typicode"
+      "author": ["typicode","juan"]
     }
   ],
   "comments": [
