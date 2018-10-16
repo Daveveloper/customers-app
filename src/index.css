@@ -12,3 +12,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.app-frame{
+  height: 100%;
+ }
+
+.customers-list-item .field{
+  width: 160px;
+  margin: 1px;
+  padding: 4px;
+  display: inline-block;
+}
