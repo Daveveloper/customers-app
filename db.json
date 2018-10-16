@@ -1,0 +1,32 @@
+{
+  "customers": [
+      {
+        "name":"Deivid Araya C.",
+        "dni":"114410391",
+        "age": 28
+      },
+      {
+        "name":"Manuel Medrano",
+        "dni":"514410391",
+        "age": 26
+      }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "Deivid Araya",
+    "details": "REACT developer"
+  }
+}
