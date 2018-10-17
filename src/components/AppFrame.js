@@ -6,6 +6,7 @@ const AppFrame = ({header, body}) => {
     return (
         <div>
             <div className="app-frame">
+                <h1><i><strong>Custo</strong>merk</i></h1>
                 <AppHeader title={header}/>
                 <div>{body}</div>
                 <div>Customers React App &copy; </div>
