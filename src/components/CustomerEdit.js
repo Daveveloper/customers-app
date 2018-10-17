@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form';
 import {connect} from "react-redux";
+import {setPropsAsInitial} from "../helpers/setPropsAsInitial";
 
 const CustomerEdit = ({name, dni, age}) => {
     return (
@@ -32,7 +33,12 @@ CustomerEdit.propTypes = {
 
 const customerEditForm = reduxForm({ form: 'customerEdit' })(CustomerEdit);
 
-export default connect(
+export default setPropsAsInitial(customerEditForm);
+
+/*
+* Forma anterior al High Order Component setPropsAsinitial
+connect(
     (state, props) => (
         {initialValues: props}
-    ))(customerEditForm);
+    ))
+ */
