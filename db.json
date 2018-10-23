@@ -1,21 +1,38 @@
 {
   "customers": [
-      {
-        "name":"Set Condry C.",
-        "dni":"114410391",
-        "age": 28
-      },
-      {
-        "name":"Manuel Medrano",
-        "dni":"514410391",
-        "age": 26
-      }
+    {
+      "id": "114410391",
+      "name": "DEIVID ARAYA",
+      "dni": "114410391",
+      "age": 27
+    },
+    {
+      "id": "514410391",
+      "name": "MARTA TORRES",
+      "dni": "514410391",
+      "age": 22
+    },
+    {
+      "dni": "459933234",
+      "name": "FABRICIO CHANDIS",
+      "age": 23,
+      "id": "Ew0Cney"
+    },
+    {
+      "dni": "213143434",
+      "name": "PERECITO DORMILON",
+      "age": 14,
+      "id": "PkBOhTl"
+    }
   ],
   "posts": [
     {
       "id": 1,
       "title": "json-server",
-      "author": ["typicode","juan"]
+      "author": [
+        "typicode",
+        "juan"
+      ]
     }
   ],
   "comments": [

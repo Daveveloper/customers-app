@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import AppFrame from "../components/AppFrame";
 import CustomerActions from "../components/CustomerActions";
 
@@ -25,6 +25,6 @@ class HomeContainer extends Component {
     }
 }
 
-HomeContainer.propTypes = {};
+//HomeContainer.propTypes = {};
 
 export default withRouter(HomeContainer);

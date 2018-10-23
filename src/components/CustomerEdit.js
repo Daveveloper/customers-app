@@ -1,42 +1,93 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form';
-import {connect} from "react-redux";
 import {setPropsAsInitial} from "../helpers/setPropsAsInitial";
+import CustomerActions from "./CustomerActions";
+import {Prompt} from "react-router-dom";
 
-const CustomerEdit = ({name, dni, age}) => {
+/*const isRequired = value => (
+    !value && "Campo requerido"
+);*/
+const validate = (values) => {
+    const error ={};
+
+    if(!values.name){
+        error.name = "El campo nombre es requerido";
+    }
+    if(!values.dni){
+        error.dni = "El campo Identificacion es requerido";
+    }
+
+    return error;
+};
+const isNumber = value => (
+    isNaN(Number(value)) && "El dato debe ser numerico"
+);
+
+const toNumber = value => value && Number(value);
+const toUpper = value => value && value.toUpperCase();
+const toLower = value => value && value.toLowerCase();
+
+const myField = ({input, meta, type, label,name}) => (
+    <div>
+        <label htmlFor={name}>{label}</label><br/>
+        <input { ...input } type={!type ? "text" : type} /><br/>
+        {
+            meta.touched && meta.error && <span>{meta.error}</span>
+        }
+    </div>
+);
+
+const CustomerEdit = ({dni, name, age, handleSubmit, submitting, onBack, pristine, submitSucceeded}) => {
     return (
         <div>
-            <form action="">
-                <div>
-                    <label htmlFor="dni">DNI:</label>
-                    <Field name="dni" component="input" type="text" />
-                </div>
-                <div>
-                    <label htmlFor="name">Name:</label>
-                    <Field name="name" component="input" type="text" />
-                </div>
-                <div>
-                    <label htmlFor="age">Age:</label>
-                    <Field name="age" component="input" type="number" />
-                </div>
+            <form onSubmit={handleSubmit}>
+                <Field name="dni"
+                       component={myField}
+                       type="text"
+                       label="Identificación"/>
+
+                <Field name="name"
+                       component={myField}
+                       type="text"
+                       label="Nombre"
+                       parse={toUpper} format={toLower}/>
+
+                <Field name="age"
+                       component= {myField}
+                       type="number"
+                       validate={isNumber}
+                       label="Edad"
+                        parse={toNumber}/>
+                <CustomerActions>
+                    <button type="submit" disabled={pristine || submitting}>Aceptar</button>
+                    <button type="button" onClick={onBack} disabled={ submitting }>Cancelar</button>
+                </CustomerActions>
+                <Prompt
+                    when={ !pristine && !submitSucceeded }
+                    message="Esta a punto de avandonar esta pagina!"/>
             </form>
         </div>
     );
 };
 
-CustomerEdit.propTypes = {
-    name: PropTypes.string,
+CustomerEdit.propTypes={
     dni: PropTypes.string,
+    name: PropTypes.string,
     age: PropTypes.number,
+    onBack: PropTypes.func,
 };
 
-const customerEditForm = reduxForm({ form: 'customerEdit' })(CustomerEdit);
+const customerEditForm = reduxForm(
+    {
+        form: 'customerEdit',
+        validate
+    })(CustomerEdit);
 
 export default setPropsAsInitial(customerEditForm);
 
 /*
-* Forma anterior al High Order Component setPropsAsinitial
+* Forma anterior al High Order Component setPropsAsInitial
 connect(
     (state, props) => (
         {initialValues: props}
