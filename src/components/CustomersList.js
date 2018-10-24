@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CustomerListItem from "./CustomerListItem";
+import {Tooltip} from "@material-ui/core";
 
 const CustomersList = ({ customers, url }) => {
 
@@ -12,8 +13,16 @@ const CustomersList = ({ customers, url }) => {
                     key={c.dni}
                     dni={c.dni}
                     name={c.name}
-                    editAction={'Editar'}
-                    delAction={'Eliminar'}
+                    editAction={
+                        <Tooltip title="Editar" placement="right">
+                        <i className="material-icons">edit</i>
+                        </Tooltip>
+                    }
+                    delAction={
+                        <Tooltip title="Eliminar" placement="right">
+                        <i className="material-icons">delete</i>
+                        </Tooltip>
+                    }
                     url={url}/>)
                 }
             </div>

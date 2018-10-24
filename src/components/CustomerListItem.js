@@ -1,23 +1,33 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
+import {Button} from "@material-ui/core";
 
-const CustomerListItem = ({name, editAction, delAction, url, dni}) => {
-    return (
-        <div>
-            <div className="customers-list-item">
-                <div className="field">
-                    <Link to={`${url}${dni}`}>{name}</Link>
-                </div>
-                <div className="field">
-                    <Link to={`${url}${dni}/edit`}>{editAction}</Link>
-                </div>
-                <div className="field">
-                    <Link to={`${url}${dni}/del`}>{delAction}</Link>
+class CustomerListItem extends Component{
+
+    handleDelete = () => (
+        this.props.history.push('customers/:dni/del')
+    );
+
+    render() {
+        const {name, editAction, delAction, url, dni} = this.props;
+        return (
+            <div>
+                <div className="customers-list-item">
+                    <div className="field">
+                        <Link to={`${url}${dni}`}><strong>{name}</strong></Link>
+                    </div>
+                    <div className="field">
+                        <Link to={`${url}${dni}/edit`}>{editAction}</Link>
+
+                    </div>
+                    <div className="field">
+                        <Link to={`${url}${dni}/del`}>{delAction}</Link>
+                    </div>
                 </div>
             </div>
-        </div>
-    );
+        );
+    }
 };
 
 CustomerListItem.propTypes = {
@@ -28,4 +38,4 @@ CustomerListItem.propTypes = {
     dni: PropTypes.string.isRequired,
 };
 
-export default CustomerListItem;
+export default withRouter(CustomerListItem);

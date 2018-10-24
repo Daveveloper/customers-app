@@ -7,6 +7,7 @@ import CustomersList from "../components/CustomersList";
 import CustomerActions from "../components/CustomerActions";
 import {fetchCustomers} from "../actions/fetchCustomers";
 import {getCustomers} from "../selectors/customersSelectors";
+import { Button, Tooltip } from "@material-ui/core";
 
 class CustomersContainer extends Component {
     componentDidMount() {
@@ -22,7 +23,11 @@ class CustomersContainer extends Component {
         <div>
             <CustomersList customers={customers} url={'customers/'}/>
             <CustomerActions>
-                <button onClick={this.handleAddNew}>Agregar cliente</button>
+                <Tooltip title="Agregar Cliente" placement={"right"}>
+                <Button variant={"contained"} onClick={this.handleAddNew} mini={true}>
+                    <i className="material-icons">person_add</i>
+                </Button>
+                </Tooltip>
             </CustomerActions>
         </div>
     );

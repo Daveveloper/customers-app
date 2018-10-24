@@ -23,3 +23,10 @@ code {
   padding: 4px;
   display: inline-block;
 }
+.footer{
+  margin-top: 20px;
+}
+
+a{
+  text-decoration: none;
+}
