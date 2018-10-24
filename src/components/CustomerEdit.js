@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form';
 import {setPropsAsInitial} from "../helpers/setPropsAsInitial";
@@ -28,48 +28,62 @@ const toNumber = value => value && Number(value);
 const toUpper = value => value && value.toUpperCase();
 const toLower = value => value && value.toLowerCase();
 
-const myField = ({input, meta, type, label,name}) => (
-    <div>
-        <label htmlFor={name}>{label}</label><br/>
-        <input { ...input } type={!type ? "text" : type} /><br/>
-        {
-            meta.touched && meta.error && <span>{meta.error}</span>
-        }
-    </div>
-);
+class CustomerEdit extends Component {
 
-const CustomerEdit = ({dni, name, age, handleSubmit, submitting, onBack, pristine, submitSucceeded}) => {
-    return (
+    componentDidMount() {
+        if(this.txt)
+            this.txt.focus();
+    }
+
+    renderField = ({input, meta, type, label,name, withFocus}) => (
         <div>
-            <form onSubmit={handleSubmit}>
-                <Field name="dni"
-                       component={myField}
-                       type="text"
-                       label="Identificación"/>
-
-                <Field name="name"
-                       component={myField}
-                       type="text"
-                       label="Nombre"
-                       parse={toUpper} format={toLower}/>
-
-                <Field name="age"
-                       component= {myField}
-                       type="number"
-                       validate={isNumber}
-                       label="Edad"
-                        parse={toNumber}/>
-                <CustomerActions>
-                    <button type="submit" disabled={pristine || submitting}>Aceptar</button>
-                    <button type="button" onClick={onBack} disabled={ submitting }>Cancelar</button>
-                </CustomerActions>
-                <Prompt
-                    when={ !pristine && !submitSucceeded }
-                    message="Esta a punto de avandonar esta pagina!"/>
-            </form>
+            <label htmlFor={name}>{label}</label><br/>
+            <input { ...input }
+                   type={!type ? "text" : type}
+                   ref={withFocus && (txt => this.txt = txt)}/><br/>
+            {
+                meta.touched && meta.error && <span>{meta.error}</span>
+            }
         </div>
     );
-};
+
+    render(){
+        const {handleSubmit, submitting, onBack, pristine, submitSucceeded} = this.props;
+        return (
+            <div>
+                <form onSubmit={handleSubmit}>
+                    <Field
+                        withFocus
+                        name="dni"
+                        component={this.renderField}
+                        type="text"
+                        label="Identificación"
+                       />
+
+                    <Field name="name"
+                           component={this.renderField}
+                           type="text"
+                           label="Nombre"
+                           parse={toUpper} format={toLower}/>
+
+                    <Field name="age"
+                           component= {this.renderField}
+                           type="number"
+                           validate={isNumber}
+                           label="Edad"
+                            parse={toNumber}/>
+                    <CustomerActions>
+                        <button type="submit" disabled={pristine || submitting}>Aceptar</button>
+                        <button type="button" onClick={onBack} disabled={ submitting }>Cancelar</button>
+                    </CustomerActions>
+                    <Prompt
+                        when={ !pristine && !submitSucceeded }
+                        message="Esta a punto de avandonar esta pagina!"/>
+                </form>
+            </div>
+        );
+    }
+}
 
 CustomerEdit.propTypes={
     dni: PropTypes.string,
