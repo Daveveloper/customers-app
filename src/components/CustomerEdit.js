@@ -5,6 +5,8 @@ import {setPropsAsInitial} from "../helpers/setPropsAsInitial";
 import CustomerActions from "./CustomerActions";
 import {Prompt} from "react-router-dom";
 import { Tooltip, Button } from '@material-ui/core';
+import {accessControl} from "../helpers/accessControl";
+import {CUSTOMER_EDIT} from "../constants/permissions";
 
 /*const isRequired = value => (
     !value && "Campo requerido"
@@ -102,7 +104,7 @@ const customerEditForm = reduxForm(
         validate
     })(CustomerEdit);
 
-export default setPropsAsInitial(customerEditForm);
+export default accessControl([CUSTOMER_EDIT])(setPropsAsInitial(customerEditForm));
 
 /*
 * Forma anterior al High Order Component setPropsAsInitial

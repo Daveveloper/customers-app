@@ -5,20 +5,13 @@ import {Card, CardContent} from '@material-ui/core';
 
 const AppFrame = ({header, body}) => {
     return (
-
-        <div>
-            <Card>
-                <CardContent>
-                    <div className="app-frame">
-                        <h1><i><strong>Custo</strong>merk</i></h1>
-                        <AppHeader title={header}/>
-                        <div>{body}</div>
-                        <div className="footer">Customers React App &copy; </div>
-                    </div>
-                </CardContent>
-            </Card>
-        </div>
-
+           
+        <div className="app-frame">
+            <h1><strong>Custo</strong>merk</h1>
+            <AppHeader title={header}/>
+            <div>{body}</div>
+            <div className="footer">Customers React App &copy; </div>
+        </div>   
     );
 };
 

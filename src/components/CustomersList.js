@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CustomerListItem from "./CustomerListItem";
 import {Tooltip} from "@material-ui/core";
+import {accessControl} from "../helpers/accessControl";
+import {CUSTOMER_VIEW} from "../constants/permissions";
 
 const CustomersList = ({ customers, url }) => {
 
@@ -33,4 +35,4 @@ CustomersList.propTypes = {
     url: PropTypes.string.isRequired,
 };
 
-export default CustomersList;
+export default accessControl([CUSTOMER_VIEW])(CustomersList);

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Link, withRouter} from 'react-router-dom';
 import {Button} from "@material-ui/core";
+import { Edit } from '@material-ui/icons';
 
 class CustomerListItem extends Component{
 
@@ -18,7 +19,6 @@ class CustomerListItem extends Component{
                     </div>
                     <div className="field">
                         <Link to={`${url}${dni}/edit`}>{editAction}</Link>
-
                     </div>
                     <div className="field">
                         <Link to={`${url}${dni}/del`}>{delAction}</Link>
