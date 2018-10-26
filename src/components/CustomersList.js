@@ -6,7 +6,6 @@ import {Tooltip} from "@material-ui/core";
 const CustomersList = ({ customers, url }) => {
 
     return (
-        <div>
             <div className="customers-list">
                 {customers.map( c =>
                     <CustomerListItem
@@ -26,7 +25,6 @@ const CustomersList = ({ customers, url }) => {
                     url={url}/>)
                 }
             </div>
-        </div>
     );
 };
 

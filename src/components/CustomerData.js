@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '@material-ui/core';
+import { Button, Tooltip } from '@material-ui/core';
 import CustomerActions from "./CustomerActions";
 
 const CustomerData = (
     {   //Props
+        id,
         name,
         age,
         dni,
@@ -22,9 +23,16 @@ const CustomerData = (
                 </div>
                 <div>
                     <CustomerActions>
-                        <Button variant={"fab"} onClick={onBack} mini={true}><i className="material-icons">arrow_back</i></Button>
+                        <Tooltip placement={"left"} title={"Regresar"}>
+                            <Button variant={"fab"} onClick={onBack} mini={true}><i className="material-icons">arrow_back</i></Button>
+                        </Tooltip>
                         {
-                            isDeleteAllow && <button onClick={onDelete}>Eliminar</button>
+                            isDeleteAllow &&
+                            <Tooltip placement={"right"} title={"Eliminar"}>
+                                <Button variant={"fab"} mini={true} onClick={() => onDelete(id)}>
+                                    <i className="material-icons">delete</i>
+                                </Button>
+                            </Tooltip>
                         }
                     </CustomerActions>
                 </div>
@@ -33,6 +41,7 @@ const CustomerData = (
 };
 
 CustomerData.propTypes = {
+    id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     dni: PropTypes.string.isRequired,
     age: PropTypes.number,

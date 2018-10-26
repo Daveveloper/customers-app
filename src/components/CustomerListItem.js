@@ -12,7 +12,6 @@ class CustomerListItem extends Component{
     render() {
         const {name, editAction, delAction, url, dni} = this.props;
         return (
-            <div>
                 <div className="customers-list-item">
                     <div className="field">
                         <Link to={`${url}${dni}`}><strong>{name}</strong></Link>
@@ -25,7 +24,6 @@ class CustomerListItem extends Component{
                         <Link to={`${url}${dni}/del`}>{delAction}</Link>
                     </div>
                 </div>
-            </div>
         );
     }
 };

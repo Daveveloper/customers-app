@@ -4,6 +4,7 @@ import { reduxForm, Field } from 'redux-form';
 import {setPropsAsInitial} from "../helpers/setPropsAsInitial";
 import CustomerActions from "./CustomerActions";
 import {Prompt} from "react-router-dom";
+import { Tooltip, Button } from '@material-ui/core';
 
 /*const isRequired = value => (
     !value && "Campo requerido"
@@ -72,13 +73,16 @@ class CustomerEdit extends Component {
                            validate={isNumber}
                            label="Edad"
                             parse={toNumber}/>
+
                     <CustomerActions>
-                        <button type="submit" disabled={pristine || submitting}>Aceptar</button>
-                        <button type="button" onClick={onBack} disabled={ submitting }>Cancelar</button>
+                        <Button variant={"contained"} type="submit" disabled={pristine || submitting}>Aceptar</Button>
+                        <Button variant={"contained"} type="button" onClick={onBack} disabled={ submitting }>Cancelar</Button>
                     </CustomerActions>
+
                     <Prompt
                         when={ !pristine && !submitSucceeded }
                         message="Esta a punto de avandonar esta pagina!"/>
+
                 </form>
             </div>
         );

@@ -2,14 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AppHeader from "./AppHeader";
 import {Card, CardContent} from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
-
-
-const styles = {
-    card: {
-        minWidth: 275,
-    }
-};
 
 const AppFrame = ({header, body}) => {
     return (
@@ -35,4 +27,4 @@ AppFrame.propTypes = {
     body: PropTypes.element.isRequired,
 };
 
-export default withStyles(styles)(AppFrame);
+export default AppFrame;

@@ -3,6 +3,8 @@ import { withRouter } from 'react-router-dom';
 //import PropTypes from 'prop-types';
 import AppFrame from "../components/AppFrame";
 import CustomerActions from "../components/CustomerActions";
+import { Button } from '@material-ui/core'
+import { ListAlt } from '@material-ui/icons';
 
 class HomeContainer extends Component {
     handleClick = () => (
@@ -14,11 +16,15 @@ class HomeContainer extends Component {
                 <AppFrame
                     header={'Home container'}
                     body={
-                        <CustomerActions>
-                            <button onClick={this.handleClick}>
-                                Listado de clientes
-                            </button>
-                        </CustomerActions>
+                        <div>
+                            <img src={require("./../img/logo.png")} height={200} alt={"Logo"}/>
+                            <CustomerActions>
+                                <Button variant="extendedFab" aria-label="ListAlt" onClick={this.handleClick}>
+                                    <ListAlt/>
+                                    Listado de clientes
+                                </Button>
+                            </CustomerActions>
+                        </div>
                     }/>
             </div>
         );

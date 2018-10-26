@@ -8,6 +8,7 @@ import CustomerEdit from "../components/CustomerEdit";
 import CustomerData from "../components/CustomerData";
 import {fetchCustomers} from "../actions/fetchCustomers";
 import {updateCustomer} from "../actions/updateCustomer";
+import {deleteCustomer} from "../actions/deleteCustomer";
 import {SubmissionError} from "redux-form";
 
 class CustomerContainer extends Component {
@@ -36,20 +37,32 @@ class CustomerContainer extends Component {
         this.props.history.goBack()
     );
 
-    renderCustomerControl = (isEdit) => {
+    handleOnDelete = id => (
+        this.props.deleteCustomer(id).then( v => {
+            this.props.history.goBack()
+        })
+    );
+
+    renderCustomerControl = (isEdit, isDelete) => {
         if(this.props.customer) {
             const CustomerControl = isEdit ? CustomerEdit : CustomerData;
             return <CustomerControl { ...this.props.customer }
                                     onSubmit={this.handleSubmit}
                                     onSubmitSuccess = {this.handleOnSubmitSuccess}
-                                    onBack={this.handleOnBack}/>
+                                    onBack={this.handleOnBack}
+                                    isDeleteAllow={!!isDelete}
+                                    onDelete={this.handleOnDelete}/>
         }else{
             return null;
         }
     };
     renderBody = () => (
         <Route path="/customers/:dni/edit" children={
-            ({ match }) => this.renderCustomerControl(match)
+            ({ match: isEdit }) => (
+                <Route path="/customers/:dni/del" children={
+                    ({match: isDelete}) => (this.renderCustomerControl(isEdit, isDelete))
+                }/>
+            )
         }/>
     );
 
@@ -71,6 +84,7 @@ CustomerContainer.propTypes = {
     customer: PropTypes.object,
     fetchCustomers: PropTypes.func.isRequired,
     updateCustomer: PropTypes.func.isRequired,
+    deleteCustomer: PropTypes.func.isRequired,
 };
 
 const initMapStateToProps = (state, props) => ({
@@ -81,5 +95,6 @@ const initMapStateToProps = (state, props) => ({
 export default withRouter(connect(initMapStateToProps,
     {
         fetchCustomers,
-        updateCustomer
+        updateCustomer,
+        deleteCustomer
     })(CustomerContainer));
